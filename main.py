@@ -17,7 +17,7 @@ __version__ = '3.9.9'
 
 store = JsonStore("state.json")
 
-#SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 try:
@@ -51,7 +51,7 @@ except:
     sleepTime = 0.0
     sleepTimer = 0.0
 
-#SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
+
 try:
     fraction = float(store.get('fraction')['value'])
 except:
@@ -85,7 +85,7 @@ def days(t):
     else:
         return str(d) + " days,\n"
 
-#SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 class WindowManager(ScreenManager):
@@ -115,7 +115,7 @@ class SecondWindow(Screen):
         global timer
         global futureSeconds
         futureTime = widget.text
-        kurac = True
+        one = True
 
         alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                     "u", "v", "w", "x", "y", "z", "š", "đ", "ž", "č", "ć", ".", ",", ":", ";", "-", "/", "!", "?", "'",
@@ -124,50 +124,17 @@ class SecondWindow(Screen):
             if len(futureTime.split(i)) == 3:
                 if i in futureTime:
                     futureSeconds = futureTime.split(i)[0] * 57600 + futureTime.split(i)[1] * 3600 + futureTime.split(i)[2] * 60
-                    kurac = False
+                    one = False
             elif len(futureTime.split(i)) == 2:
                 if i in futureTime:
                     futureSeconds = int(futureTime.split(i)[0]) * 3600 + int(futureTime.split(i)[1]) * 60
-                    kurac = False
-        if kurac == True:
+                    one = False
+        if one == True:
             try:
                 futureSeconds = int(futureTime) * 3600
             except:
                 return
 
-        #     try:
-        #         if futureTime != futureTime.split(i)[0] + futureTime.split(i)[1] + futureTime.split(i)[2]:
-        #             futureTime = [futureTime.split(i)[0], futureTime.split(i)[1]] + futureTime.split(i)[2]
-        #             e2 = False
-        #             break
-        #     except:
-        #         e2 = True
-        #         continue
-        #
-        #     if e2 == True:
-        #         try:
-        #             if futureTime != futureTime.split(i)[0] + futureTime.split(i)[1]:
-        #                 futureTime = [futureTime.split(i)[0], futureTime.split(i)[1]]
-        #                 e1 = False
-        #                 break
-        #         except:
-        #             e1 = True
-        #             continue
-        # try:
-        #     if not kurac:
-        #         print("2")
-        #         if int(futureTime[0]) > 24 or int(futureTime[1]) > 60:
-        #             return
-        #         futureSeconds = int(futureTime[0]) * 3600 + int(futureTime[1]) * 60
-        #     else:
-        #         print("3")
-        #         print(futureTime[0])
-        #         if int(futureTime[0]) > 60:
-        #             return
-        #         futureSeconds = int(futureTime) * 3600
-        # except:
-        #     print("1")
-        #     return
 
         timer = futureSeconds
         store.put('timer', value=timer)
@@ -186,7 +153,7 @@ class SecondWindow(Screen):
 
         sleep = True
         work = False
-        kurac = False
+        one = False
         currentTime = datetime.now()
         futureTime = widget.text
 
@@ -197,13 +164,13 @@ class SecondWindow(Screen):
             try:
                 if futureTime != futureTime.split(i)[0] + futureTime.split(i)[1]:
                     futureTime = [futureTime.split(i)[0], futureTime.split(i)[1]]
-                    kurac = False
+                    one = False
                     break
             except:
-                kurac = True
+                one = True
                 continue
         try:
-            if not kurac:
+            if not one:
                 if int(futureTime[0]) > 24 or int(futureTime[1]) > 60:
                     return
                 futureSeconds = int(futureTime[0]) * 3600 + int(futureTime[1]) * 60
@@ -275,7 +242,6 @@ class MainWindow(Screen):
     button2Color = ListProperty([0.5, 0.5, 0.5, 1])
 
 
-    # SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
     def __init__(self, **kwargs):
         super(MainWindow, self).__init__(**kwargs)
         Clock.schedule_interval(self.update, 1 / 30)
@@ -354,7 +320,7 @@ class MainWindow(Screen):
         store.put('sleepTimer', value=sleepTimer)
         store.put('sleepTime', value=sleepTime)
 
-    # SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
+
     def tapButton1(self):
         global work
         global sleep
@@ -398,7 +364,7 @@ class MainWindow(Screen):
     def awakenMainFromSecond(self):
         self.button4Color = [0, 0, 0, 0]
         self.button4Label = [0, 0, 0, 0]
-    #SJETI SE DA SE STVARI ZOVU DRUGAČIJE!!!!!!!!!!!!!!!!!!!!!!!
+
 
 class breaktimerApp(App):
     pass
