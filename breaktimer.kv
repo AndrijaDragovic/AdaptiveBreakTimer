@@ -1,0 +1,128 @@
+
+
+WindowManager:
+    MainWindow:
+    SecondWindow:
+
+
+<MainWindow>:
+    name: "main"
+    Button:
+        background_color: root.button4Color
+        color: root.button4Label
+        text: "Awaken"
+        font_size: "40dp"
+        size_hint: 1, 0.15
+        pos_hint: {"top": 0.4}
+        on_release: root.awakenMain()
+    Button:
+        size_hint: None, None
+        background_color: 0, 0, 0, 0
+        size: "12mm", "12mm"
+        pos_hint: {"right": 0.99, "top": 0.99 }
+        on_press:
+            root.manager.transition.duration = 0
+            app.root.current = "second"
+    Image:
+        source: 'settings.png'
+        size_hint: None, None
+        size: "12mm", "12mm"
+        pos_hint: {"right": 0.99, "top": 0.99 }
+
+    BoxLayout:
+
+        orientation: "vertical"
+        size_hint: 1, 0.9
+
+
+
+
+        Label:
+
+            text: root.text
+            size_hint: 1, 1
+            font_size: "70dp"
+            color: root.clockColor
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, 0.2
+            Button:
+                background_color: root.button1Color
+                color: root.button1Label
+                text: "WORK"
+                font_size: "40dp"
+                on_release: root.tapButton1()
+            Button:
+                background_color: root.button2Color
+                color: root.button2Label
+                text: "REST"
+                font_size: "40dp"
+                on_release: root.tapButton2()
+
+
+        Label:
+            size_hint: 0.15, 0.15
+
+
+<SecondWindow>:
+    name: "second"
+    orientation: "vertical"
+    Button:
+        size_hint: None, None
+        background_color: 0, 0, 0, 0
+        size: "12mm", "12mm"
+        pos_hint: {"right": 0.99, "top": 0.99 }
+        on_press:
+            root.manager.transition.duration = 0
+            app.root.current = "main"
+    Image:
+        source: 'settings.png'
+        size_hint: None, None
+        size: "12mm", "12mm"
+        pos_hint: {"right": 0.99, "top": 0.99 }
+    Label:
+        pos_hint: {"center_x": 0.25, "top": 0.7 }
+        size_hint: 1, 0.05
+        halign: "left"
+        font_size: "30dp"
+        text: "Work/time:"
+    TextInput:
+        pos_hint: {"center_x": 0.7, "top": 0.7 }
+        size_hint: 0.25, None
+        height: "50dp"
+        font_size: "30dp"
+        multiline: False
+        on_text_validate:
+            root.setFraction(self)
+    Label:
+        pos_hint: {"center_x": 0.25, "top": 0.5 }
+        size_hint: 1, 0.05
+        halign: "left"
+        font_size: "30dp"
+        text: "Set timer:"
+    TextInput:
+        pos_hint: {"center_x": 0.7, "top": 0.5 }
+        size_hint: 0.25, None
+        height: "50dp"
+        font_size: "30dp"
+        multiline: False
+        on_text_validate:
+            root.setTimer(self)
+
+    #aaaaaaa
+    Label:
+        pos_hint: {"center_x": 0.25, "top": 0.3 }
+        size_hint: 1, 0.05
+        halign: "left"
+        font_size: "30dp"
+        text: "Sleep until:"
+    TextInput:
+        pos_hint: {"center_x": 0.7, "top": 0.3 }
+        size_hint: 0.25, None
+        height: "50dp"
+        font_size: "30dp"
+        multiline: False
+        on_text_validate:
+            root.setSleep(self)
+            root.manager.transition.duration = 0
+            app.root.current = "main"
